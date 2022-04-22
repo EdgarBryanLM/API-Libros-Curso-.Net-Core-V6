@@ -18,10 +18,27 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet] //api/autores
+        [HttpGet ("listado")] //api/autores/listado
+        [HttpGet("/listado")]//listado
         public async Task<ActionResult<List<Autor>>> Get()
         {
             return await context.Autores.Include(x => x.Libro).ToListAsync();
+        }
+
+
+        [HttpGet("{id:int}")]
+        public async Task <ActionResult<Autor>> GetAutorID(int id)
+        {
+            var autor= await context.Autores.FirstOrDefaultAsync(x=> x.id == id);
+            if (autor == null) { return new NotFoundResult(); } else { return autor; }
+        }
+
+        [HttpGet("{nombre}/{nombre?}")] //Enviar diferentes numeros de parametros y eleguir cual es opcional y cual no 
+        public async Task<ActionResult<Autor>> GetAutorNombre(string nombre)
+        {
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Nombre.Contains(nombre));
+            if (autor == null) { return new NotFoundResult(); } else { return autor; }
         }
 
         [HttpPost]
