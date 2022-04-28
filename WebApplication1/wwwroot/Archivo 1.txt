@@ -1,0 +1,20 @@
+Proceso iniciado
+Proceso finalizado
+Proceso iniciado
+Proceso en ejecucion25/04/2022 05:40:25 p. m.
+Proceso en ejecucion25/04/2022 05:40:30 p. m.
+Proceso en ejecucion25/04/2022 05:40:35 p. m.
+Proceso en ejecucion25/04/2022 05:40:40 p. m.
+Proceso en ejecucion25/04/2022 05:40:45 p. m.
+Proceso en ejecucion25/04/2022 05:40:50 p. m.
+Proceso en ejecucion25/04/2022 05:40:55 p. m.
+Proceso en ejecucion25/04/2022 05:41:00 p. m.
+Proceso en ejecucion25/04/2022 05:41:05 p. m.
+Proceso en ejecucion25/04/2022 05:41:10 p. m.
+Proceso en ejecucion25/04/2022 05:41:15 p. m.
+Proceso en ejecucion25/04/2022 05:41:20 p. m.
+Proceso en ejecucion25/04/2022 05:41:25 p. m.
+Proceso en ejecucion25/04/2022 05:41:30 p. m.
+Proceso en ejecucion25/04/2022 05:41:35 p. m.
+Proceso en ejecucion25/04/2022 05:41:40 p. m.
+Proceso finalizado

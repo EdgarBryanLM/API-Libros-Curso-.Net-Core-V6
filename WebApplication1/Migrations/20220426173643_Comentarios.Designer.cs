@@ -11,8 +11,8 @@ using WebApplication1;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20220421171442_Libros")]
-    partial class Libros
+    [Migration("20220426173643_Comentarios")]
+    partial class Comentarios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,11 +32,34 @@ namespace WebApplication1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("id");
 
                     b.ToTable("Autores");
+                });
+
+            modelBuilder.Entity("WebApplication1.Entidades.Comentario", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Contenido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("LibroId");
+
+                    b.ToTable("Comentarios");
                 });
 
             modelBuilder.Entity("WebApplication1.Entidades.Libro", b =>
@@ -47,33 +70,30 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AutorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Titulo")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AutorId");
 
                     b.ToTable("Libros");
                 });
 
-            modelBuilder.Entity("WebApplication1.Entidades.Libro", b =>
+            modelBuilder.Entity("WebApplication1.Entidades.Comentario", b =>
                 {
-                    b.HasOne("WebApplication1.Entidades.Autor", "Autor")
-                        .WithMany("Libro")
-                        .HasForeignKey("AutorId")
+                    b.HasOne("WebApplication1.Entidades.Libro", "Libro")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("LibroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Autor");
+                    b.Navigation("Libro");
                 });
 
-            modelBuilder.Entity("WebApplication1.Entidades.Autor", b =>
+            modelBuilder.Entity("WebApplication1.Entidades.Libro", b =>
                 {
-                    b.Navigation("Libro");
+                    b.Navigation("Comentarios");
                 });
 #pragma warning restore 612, 618
         }
