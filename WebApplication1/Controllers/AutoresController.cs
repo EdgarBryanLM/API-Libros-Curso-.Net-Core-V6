@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DTOs;
@@ -8,7 +10,8 @@ namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("api/autores")]
-  
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,Policy ="EsAdmin")]
+
     public class AutoresController: ControllerBase
     {
 
@@ -43,7 +46,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpGet] //api/autores
-
+        [AllowAnonymous] //Permite que usuario no autentificados la puedan consumir 
         public async Task<ActionResult<List<AutorDTO>>> Get()
         {
            
