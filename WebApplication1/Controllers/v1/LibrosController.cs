@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication1.DTOs;
 using WebApplication1.Entidades;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.Controllers.v1
 {
     [ApiController]
-    [Route("api/libros")]
+    [Route("api/v1/libros")]
     public class LibrosController:ControllerBase
     {
         private readonly AplicationDbContext context;
@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
             // return await context.Libros.Include(x=> x.Autor).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CrearLibro")]
         public async Task<ActionResult> Post(LibroPost libroPost)
         {
 
@@ -76,7 +76,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int}" ,Name ="ActualizarLibro")]
         public async Task<ActionResult> Put(int id,LibroPost libroPost)
         {
             var librodb= await context.Libros.Include(x=> x.AutoresLibros).FirstOrDefaultAsync(x=> x.Id == id);
@@ -96,7 +96,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpPatch("{id:int}")]
+        [HttpPatch("{id:int}",Name ="PatchLibro")]
         public async Task<ActionResult> Patch(int id,JsonPatchDocument<LibroPachtDTO> patchDocument)
         {
             if(patchDocument == null)
@@ -131,7 +131,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}",Name ="BorrarLibro")]
         public async Task<ActionResult> Delete(int id)
         {
 

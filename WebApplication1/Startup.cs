@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using WebApplication1.Filters;
@@ -41,13 +42,32 @@ namespace WebApplication1
 
             services.AddSwaggerGen(c =>
             {
+
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "WebAPIAutores",
+                    Version = "v1",
+                    Description = "Esta es una Api de libros desarrollada en el curso de .net v6",
+                    Contact = new OpenApiContact
+                    {
+                        Email ="edgar360456@gmail.com",
+                        Name ="Edgar Lopez",
+                        Url = new Uri("https://google.com")
+                    },
+
+                    License = new OpenApiLicense
+                    {
+                        Name ="ITSUR"
+                    }
+                });
+
                 c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
                     Name ="Authorization",
                     Type =SecuritySchemeType.ApiKey,
                     Scheme ="Bearer",
                     BearerFormat = "JWT",
-                    In= ParameterLocation.Header,
+                    In= ParameterLocation.Header
 
                 });
 
@@ -66,6 +86,13 @@ namespace WebApplication1
                         new string[]{}
                     }
                 });
+
+
+
+                var archivoXML = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+                var rutaXML= Path.Combine(AppContext.BaseDirectory, archivoXML);
+
             });
 
             services.AddResponseCaching();

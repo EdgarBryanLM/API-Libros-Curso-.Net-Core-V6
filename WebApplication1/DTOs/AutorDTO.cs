@@ -1,6 +1,6 @@
 ﻿namespace WebApplication1.DTOs
 {
-    public class AutorDTO
+    public class AutorDTO:Recurso
     {
         public int id { get; set; }
 

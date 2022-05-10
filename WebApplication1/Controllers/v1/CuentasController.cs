@@ -10,10 +10,10 @@ using System.Text;
 using WebApplication1.DTOs;
 using WebApplication1.Servicios;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.Controllers.v1
 {
     [ApiController]
-    [Route("api/cuentas")]
+    [Route("api/v1/cuentas")]
     public class CuentasController:ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPost("registrar")]
+        [HttpPost("registrar",Name ="Registar")]
 
         public async Task<ActionResult<Respuestalogin>> Registrar(CredencialesDTOcs credencialesDTOcs)
         {
@@ -81,7 +81,7 @@ namespace WebApplication1.Controllers
             }
         }
 
-        [HttpPost("login")]
+        [HttpPost("login",Name ="Login")]
         public async Task<ActionResult<Respuestalogin>> Logeo(CredencialesDTOcs credencialesDTOcs)
         {
             var resultado= await signInManager.PasswordSignInAsync(credencialesDTOcs.email,

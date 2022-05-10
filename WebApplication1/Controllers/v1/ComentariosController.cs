@@ -9,11 +9,11 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.Controllers.v1
 {
 
     [ApiController] 
-    [Route("api/libros/{libroId:int}/comentarios")]
+    [Route("api/v1/libros/{libroId:int}/comentarios")]
     public class ComentariosController: ControllerBase
     {
         private readonly AplicationDbContext context;
@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
             return mapper.Map<List<ComentarioDTO>>(comentarios);
         } */
 
-        [HttpGet]
+        [HttpGet(Name = "ObtenerComentarios")]
         public async Task<ActionResult<List<ComentarioDTO>>> Geta(int libroId)
         {
             var existe = await context.Libros.AnyAsync(x => x.Id == libroId);
@@ -102,7 +102,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost(Name = "CrearComentario")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         public async Task<IActionResult> Post(int libroId, ComentarioPostDTO comentarioPostDTO)
@@ -136,7 +136,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int}",Name ="ActualizarComentario")]
         public async Task<ActionResult> Put(int libroId,ComentarioPostDTO comentarioDTO, int id)
         {
             var existel = await context.Libros.AnyAsync(x => x.Id == libroId);
